@@ -1,8 +1,3 @@
-# Enlaces
-  - [Jenkins](http://157.253.238.75:8080/jenkins-misovirtual/)
-  - [Sonar](http://157.253.238.75:8080/sonar-misovirtual/)
-  - [Jenkins Grupo E08](http://157.253.238.75:8080/jenkins-misovirtual/view/MISW4403/job/MISW4403_202315_E08/)
-  - [Sonar Grupo E08](http://157.253.238.75:8080/sonar-misovirtual/dashboard?id=MISW4403_202315_E08%3Asonar)
 
 
 # Crear un modulo
