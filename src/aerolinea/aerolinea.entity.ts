@@ -4,8 +4,7 @@ import { Column,
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { AeropuertoEntity } from 'src/aeropuerto/aeropuerto.entity';
-
+import { AeropuertoEntity } from '../aeropuerto/aeropuerto.entity';
 
 @Entity()
 export class  AerolineaEntity {

@@ -5,7 +5,7 @@ import {Body, Controller, Delete, Get, HttpCode,
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors.interceptor';
 import { plainToInstance } from 'class-transformer';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
-import { Aerolineaervice } from './aerolinea.service';
+import { AerolineaService } from './aerolinea.service';
 import { AerolineaDTO } from './aerolinea.dto';
 import { AerolineaEntity } from './aerolinea.entity';
 
@@ -13,7 +13,7 @@ import { AerolineaEntity } from './aerolinea.entity';
 @UseInterceptors(BusinessErrorsInterceptor)
 export class AerolineaController {
   private readonly logger = new Logger(AerolineaController.name);
-    constructor(private readonly aerolineaService: Aerolineaervice) {}
+    constructor(private readonly aerolineaService: AerolineaService) {}
 
     @Get()
     @UseGuards(JwtAuthGuard)

@@ -3,11 +3,11 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { faker } from '@faker-js/faker';
-import { Aerolineaervice } from './aerolinea.service';
+import { AerolineaService } from './aerolinea.service';
 import { AerolineaEntity } from './aerolinea.entity';
 
 describe('Aerolinearvice', () => {
-  let service: Aerolineaervice;
+  let service: AerolineaService;
   let repository: Repository<AerolineaEntity>;
   let aerolineaList: AerolineaEntity[];
 
@@ -18,6 +18,8 @@ describe('Aerolinearvice', () => {
       const aerolineaEntity: AerolineaEntity = await repository.save({
         nombre: faker.company.name(),
         descripcion: faker.lorem.sentence(),
+        fechaFundacion: new Date(faker.date.past()),
+        urlPaginaWeb: faker.address.country(),
       });
       aerolineaList.push(aerolineaEntity);
     }
@@ -26,10 +28,10 @@ describe('Aerolinearvice', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [...TypeOrmTestingConfig()],
-      providers: [Aerolineaervice],
+      providers: [AerolineaService],
     }).compile();
 
-    service = module.get<Aerolineaervice>(Aerolineaervice);
+    service = module.get<AerolineaService>(AerolineaService);
     repository = module.get<Repository<AerolineaEntity>>(
       getRepositoryToken(AerolineaEntity),
     );
@@ -41,9 +43,9 @@ describe('Aerolinearvice', () => {
   });
 
   it('findAll should return all Aerolineas', async () => {
-    const aerolinea: AerolineaEntity[] = await service.findAll();
-    expect(aerolinea).not.toBeNull();
-    expect(aerolinea).toHaveLength(aerolineaList.length);
+    const aerolineas: AerolineaEntity[] = await service.findAll();
+    expect(aerolineas).not.toBeNull();
+    expect(aerolineas).toHaveLength(aerolineaList.length);
   });
 
   it('findOne should return a Aerolinea by id', async () => {

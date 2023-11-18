@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { AeropuertoModule } from './aeropuerto/aeropuerto.module';
 import { AerolineaEntity } from './aerolinea/aerolinea.entity';
 import { AeropuertoEntity } from './aeropuerto/aeropuerto.entity';
+import { AerolineaModule } from './aerolinea/aerolinea.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -25,10 +26,9 @@ import { AeropuertoEntity } from './aeropuerto/aeropuerto.entity';
       keepConnectionAlive: true,
     }),
     AeropuertoModule,
-    AeropuertoModule,
+    AerolineaModule,
     UserModule,
     AuthModule,
-    AeropuertoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
