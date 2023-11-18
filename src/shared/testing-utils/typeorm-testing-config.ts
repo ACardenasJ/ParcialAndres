@@ -1,6 +1,6 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CulturagastronomicaEntity } from '../../culturagastronomica/culturagastronomica.entity';
-import { PaisEntity } from '../../pais/pais.entity';
+import { PaisEntity } from '../../aerolinea/aerolinea.entity';
 
 
 export const TypeOrmTestingConfig = () => [

@@ -1,16 +1,16 @@
 
 
 # Crear un modulo
-  nest g mo culturagastronomica
+  nest g mo aeropuerto
 
 # Crear una entidad
-  nest g cl culturagastronomica/culturagastronomica.entity --no-spec
+  nest g cl aeropuerto/aeropuerto.entity --no-spec
 
 # Crear un servicio
-  nest g s culturagastronomica
+  nest g s aeropuerto
 
 # Crear un controlador
-  nest g co culturagastronomica --no-spec
+  nest g co aeropuerto --no-spec
 
 # Correr Unitarias
   npm run test

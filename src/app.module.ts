@@ -2,13 +2,11 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CulturagastronomicaModule } from './culturagastronomica/culturagastronomica.module';
-import { CulturagastronomicaEntity } from './culturagastronomica/culturagastronomica.entity';
-import { PaisModule } from './pais/pais.module';
-import { PaisEntity } from './pais/pais.entity';
-import { GastroculturePaisModule } from './gastroculture_pais/gastroculture_pais.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { AeropuertoModule } from './aeropuerto/aeropuerto.module';
+import { AerolineaEntity } from './aerolinea/aerolinea.entity';
+import { AeropuertoEntity } from './aeropuerto/aeropuerto.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -19,18 +17,18 @@ import { AuthModule } from './auth/auth.module';
       password: '1234',
       database: 'gastroapidb',
       entities: [
-        CulturagastronomicaEntity,
-        PaisEntity,
+        AerolineaEntity,
+        AeropuertoEntity,
       ],
       dropSchema: false,
       synchronize: true,
       keepConnectionAlive: true,
     }),
-    CulturagastronomicaModule,
-    PaisModule,
-    GastroculturePaisModule,
+    AeropuertoModule,
+    AeropuertoModule,
     UserModule,
     AuthModule,
+    AeropuertoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,7 +1,7 @@
-/* eslint-disable prettier/prettier */
+
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class PaisDTO {
+export class AerolineaDTO {
   @IsString()
   @IsNotEmpty()
   readonly nombre: string;
@@ -9,4 +9,12 @@ export class PaisDTO {
   @IsString()
   @IsNotEmpty()
   readonly descripcion: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly fechaFundacion: Date;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly urlPaginaWeb: string;
 }
