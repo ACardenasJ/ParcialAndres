@@ -17,5 +17,6 @@ export const TypeOrmTestingConfig = () => [
   }),
   TypeOrmModule.forFeature([
     AerolineaEntity,
+    AeropuertoEntity,
   ]),
 ];

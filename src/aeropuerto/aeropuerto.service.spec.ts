@@ -17,7 +17,9 @@ describe('aeropuertorvice', () => {
     for (let i = 0; i < 5; i++) {
       const aeropuertoEntity: AeropuertoEntity = await repository.save({
         nombre: faker.company.name(),
-        descripcion: faker.lorem.sentence(),
+        codigo: faker.address.zipCode(),
+        pais: faker.address.country(),
+        ciudad: faker.address.city(),
       });
       aeropuertoList.push(aeropuertoEntity);
     }
@@ -36,17 +38,17 @@ describe('aeropuertorvice', () => {
     await seedDatabase();
   });
 
-  xit('should be defined', () => {
+  it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
-  xit('findAll should return all aeropuertos', async () => {
+  it('findAll should return all aeropuertos', async () => {
     const aeropuerto: AeropuertoEntity[] = await service.findAll();
     expect(aeropuerto).not.toBeNull();
     expect(aeropuerto).toHaveLength(aeropuertoList.length);
   });
 
-  xit('findOne should return a aeropuerto by id', async () => {
+  it('findOne should return a aeropuerto by id', async () => {
     const storedAeropuerto: AeropuertoEntity = aeropuertoList[1];
     const aeropuerto: AeropuertoEntity = await service.findOne(storedAeropuerto.id);
     expect(aeropuerto).not.toBeNull();
@@ -54,14 +56,14 @@ describe('aeropuertorvice', () => {
     expect(aeropuerto.codigo).toEqual(storedAeropuerto.codigo);
   });
 
-  xit('findOne should throw an exception for an invalid aeropuertos', async () => {
+  it('findOne should throw an exception for an invalid aeropuertos', async () => {
     await expect(() => service.findOne('0')).rejects.toHaveProperty(
       'message',
       'The aeropuerto with the given id was not found',
     );
   });
 
-  xit('create should return a new aeropuertos', async () => {
+  it('create should return a new aeropuertos', async () => {
     const aeropuerto: AeropuertoEntity = {
       id: '48a9ab90-1276-11ed-861d-0242ac120003',
       nombre: faker.company.name(),
@@ -80,7 +82,7 @@ describe('aeropuertorvice', () => {
     expect(storedAeropuerto.ciudad).toEqual(newAeropuerto.ciudad);
   });
 
-  xit('update should modify a aeropuertos', async () => {
+  it('update should modify a aeropuertos', async () => {
     const aeropuerto: AeropuertoEntity = aeropuertoList[0];
     aeropuerto.nombre = 'El dorado';
     aeropuerto.pais = 'Colombia';
@@ -94,7 +96,7 @@ describe('aeropuertorvice', () => {
     expect(storedAeropuerto.pais).toEqual(aeropuerto.pais);
   });
 
-  xit('update should throw an exception for an invalid aeropuertos', async () => {
+  it('update should throw an exception for an invalid aeropuertos', async () => {
     let aeropuerto: AeropuertoEntity = aeropuertoList[0];
     aeropuerto = {
       ...aeropuerto,
@@ -107,7 +109,7 @@ describe('aeropuertorvice', () => {
     );
   });
 
-  xit('delete should remove a aeropuertos', async () => {
+  it('delete should remove a aeropuertos', async () => {
     const aeropuerto: AeropuertoEntity = aeropuertoList[0];
     await service.delete(aeropuerto.id);
     const deleteaeropuerto: AeropuertoEntity = await repository.findOne({
@@ -116,7 +118,7 @@ describe('aeropuertorvice', () => {
     expect(deleteaeropuerto).toBeNull();
   });
 
-  xit('delete should throw an exception for an invalid aeropuertos', async () => {
+  it('delete should throw an exception for an invalid aeropuertos', async () => {
     const aeropuerto: AeropuertoEntity = aeropuertoList[0];
     await service.delete(aeropuerto.id);
     await expect(() => service.delete('0')).rejects.toHaveProperty(
