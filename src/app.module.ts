@@ -8,6 +8,7 @@ import { AeropuertoModule } from './aeropuerto/aeropuerto.module';
 import { AerolineaEntity } from './aerolinea/aerolinea.entity';
 import { AeropuertoEntity } from './aeropuerto/aeropuerto.entity';
 import { AerolineaModule } from './aerolinea/aerolinea.module';
+import { AerolineaAeropuertoModule } from './aerolinea_aeropuerto/aerolinea_aeropuerto.module'
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -27,6 +28,7 @@ import { AerolineaModule } from './aerolinea/aerolinea.module';
     }),
     AeropuertoModule,
     AerolineaModule,
+    AerolineaAeropuertoModule,
     UserModule,
     AuthModule,
   ],
