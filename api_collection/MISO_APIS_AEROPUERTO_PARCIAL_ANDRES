@@ -1,0 +1,2367 @@
+{
+	"info": {
+		"_postman_id": "6d800eb5-3744-475b-8e26-0b2d52f6322f",
+		"name": "MISO_APIS_PARCIAL_ANDRES",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7032252"
+	},
+	"item": [
+		{
+			"name": "1.0.0",
+			"item": [
+				{
+					"name": "Aerolinea_Aeropuerto",
+					"item": [
+						{
+							"name": "AssociateAeroLineaToAeropuerto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = pm.response.json()",
+											"pm.globals.set(\"aerolineadId\", data.id);",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"   pm.response.to.have.status(201);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Aeropuerto la NUbia\",\n    \"codigo\": \"abc​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aerolinea_aeropuerto/aerolinea/{{aerolinea_id}}/aeropuerto/{{aeropuerto_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea_aeropuerto",
+										"aerolinea",
+										"{{aerolinea_id}}",
+										"aeropuerto",
+										"{{aeropuerto_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "AssociateAeroLineaToAeropuerto",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nombre\": \"Aeropuerto la NUbia\",\n    \"codigo\": \"abc​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/aerolinea_aeropuerto/aerolinea/{{aerolinea_id}}/aeropuerto/{{aeropuerto_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea_aeropuerto",
+												"aerolinea",
+												"{{aerolinea_id}}",
+												"aeropuerto",
+												"{{aeropuerto_id}}"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120003\",\n        \"nombre\": \"Aeropuerto la NUbia\",\n        \"codigo\": \"abc​\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Manizales\",\n        \"aerolineas\": [\n            {\n             \"id\": \"48a9ab90-1276-11ed-861d-0242ac120003\",\n            \"nombre\": \"Aeropuerto la NUbia\",\n            \"codigo\": \"abc​\",\n            \"pais\": \"Colombia\",\n            \"ciudad\": \"Manizales\",\n            \"aerolineas\": []   \n            }\n        ]\n}"
+								}
+							]
+						},
+						{
+							"name": "AssociateAeroLineaToAeropuertoFailed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"   pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Get expected error message\", function () {",
+											"   var data = pm.response.json();",
+											"   pm.expect(data.message).to.eql('The Aeropuerto with the given id was not found');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Aeropuerto la NUbia\",\n    \"codigo\": \"abc4​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aerolinea_aeropuerto/aerolinea/{{aerolinea_id}}/aeropuerto/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea_aeropuerto",
+										"aerolinea",
+										"{{aerolinea_id}}",
+										"aeropuerto",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "AssociateAeroLineaToAeropuertoFailed",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nombre\": \"Aeropuerto la NUbia\",\n    \"codigo\": \"abc4​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/aerolinea_aeropuerto/{{aerolinea_id}}/aeropuerto/00000000-0000-0000-0000-000000000000",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea_aeropuerto",
+												"{{aerolinea_id}}",
+												"aeropuerto",
+												"00000000-0000-0000-0000-000000000000"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The Aeropuerto with the given id was not found\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GettAllAeropuertosFromAeroLinea",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"pm.test('Number of Aeropuertos > ' + 0, function () {",
+											"   var data = pm.response.json()",
+											"   pm.expect(data.length).to.greaterThan(0)",
+											"});",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"   pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aerolinea_aeropuerto/aerolinea/{{aerolinea_id}}/aeropuerto/{{aeropuerto_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea_aeropuerto",
+										"aerolinea",
+										"{{aerolinea_id}}",
+										"aeropuerto",
+										"{{aeropuerto_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GettAllAeropuertosFromAeroLinea",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aerolinea_aeropuerto/{{aerolinea_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea_aeropuerto",
+												"{{aerolinea_id}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "[\n   {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120003\",\n        \"nombre\": \"Aeropuerto la NUbia\",\n        \"codigo\": \"abc​\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Manizales\",\n        \"aerolineas\": []\n    },\n    {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120013\",\n        \"nombre\": \"Dorado\",\n        \"codigo\": \"cba​\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Bogota\",\n        \"aerolineas\": []\n    },\n    {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120015\",\n        \"nombre\": \"Matecaña\",\n        \"codigo\": \"cba​\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"pereira\",\n        \"aerolineas\": []\n\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "GetOneAeropuertosFromAeroLinea",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"   pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aerolinea_aeropuerto/aerolinea/{{aerolinea_id}}/aeropuerto/{{aeropuerto_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea_aeropuerto",
+										"aerolinea",
+										"{{aerolinea_id}}",
+										"aeropuerto",
+										"{{aeropuerto_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetOneAeropuertosFromAeroLinea",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aerolinea_aeropuerto/aerolinea/{{aerolinea_id}}/aeropuerto/{{aeropuerto_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea_aeropuerto",
+												"aerolinea",
+												"{{aerolinea_id}}",
+												"aeropuerto",
+												"{{aeropuerto_id}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120013\",\n        \"nombre\": \"Dorado\",\n        \"codigo\": \"cba​\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Bogota\",\n        \"aerolineas\": []\n    }"
+								}
+							]
+						},
+						{
+							"name": "GetOneAeropuertoFailed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"   pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Get expected error message\", function () {",
+											"   var data = pm.response.json();",
+											"   pm.expect(data.message).to.eql(\"'The Aerolinea with the given id was not found'\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetOneAeropuertoFailed",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aeropuerto/00000000-0000-0000-0000-000000000000",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aeropuerto",
+												"00000000-0000-0000-0000-000000000000"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 404,\n    \"message\": \"'The Aerolinea with the given id was not found'\"\n}"
+								}
+							]
+						},
+						{
+							"name": "UpdateAllAeropuertoFromAelonia",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"   pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\n        \"pais\": \"COLOMBIA\"\n   \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aerolinea/{{aerolinea_id}}/aeropuerto/{{aeropuerto_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea",
+										"{{aerolinea_id}}",
+										"aeropuerto",
+										"{{aeropuerto_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "UpdateAllAeropuertoFromAelonia",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\n        \"pais\": \"COLOMBIA\"\n   \n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/aerolinea/{{aerolinea_id}}/aeropuerto/{{aeropuerto_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea",
+												"{{aerolinea_id}}",
+												"aeropuerto",
+												"{{aeropuerto_id}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "[\n   {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120003\",\n        \"nombre\": \"Aeropuerto la NUbia\",\n        \"codigo\": \"abc​\",\n        \"pais\": \"COLOMBIA\",\n        \"ciudad\": \"Manizales\",\n        \"aerolineas\": []\n    },\n    {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120013\",\n        \"nombre\": \"Dorado\",\n        \"codigo\": \"cba​\",\n        \"pais\": \"COLOMBIA\",\n        \"ciudad\": \"Bogota\",\n        \"aerolineas\": []\n    },\n    {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120015\",\n        \"nombre\": \"Matecaña\",\n        \"codigo\": \"cba​\",\n        \"pais\": \"COLOMBIA\",\n        \"ciudad\": \"pereira\",\n        \"aerolineas\": []\n\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "UpdateAeropuertoFromAelonia",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = pm.response.json()",
+											"pm.globals.set(\"aeropurtoId\", data.id);",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"   pm.response.to.have.status(201);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"nombre\": \"Aeropuerto internacional la Nubia\",\n    \"codigo\": \"ABC\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aerolinea/{{aerolinea_id}}/aeropuerto/{{aeropuerto_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea",
+										"{{aerolinea_id}}",
+										"aeropuerto",
+										"{{aeropuerto_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "UpdateAeropuertoFromAelonia",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nombre\": \"Aeropuerto la NUbia\",\n    \"codigo\": \"ABC\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/aerolinea/{{aerolinea_id}}/aeropuerto/{{aeropuerto_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea",
+												"{{aerolinea_id}}",
+												"aeropuerto",
+												"{{aeropuerto_id}}"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120003\",\n        \"nombre\": \"Aeropuerto la NUbia\",\n        \"codigo\": \"ABC\",\n        \"pais\": \"colombia\",\n        \"ciudad\": \"Manizales\",\n        \"aerolineas\": []\n    }"
+								}
+							]
+						},
+						{
+							"name": "DeleteAeropuertoFromAelonia",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function () {",
+											"   pm.response.to.have.status(204);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aerolinea/{{aerolinea_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea",
+										"{{aerolinea_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DeleteAeropuertoFromAelonia",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aeropuerto/{{aeropuerto_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aeropuerto",
+												"{{aeropuerto_id}}"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Aeropuerto",
+					"item": [
+						{
+							"name": "AddAeropuerto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = pm.response.json()",
+											"pm.globals.set(\"aeropuertoId\", data.id);",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"   pm.response.to.have.status(201);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Aeropuerto la NUbia\",\n    \"codigo\": \"abc​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "AddAeropuerto",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nombre\": \"Aeropuerto la NUbia\",\n    \"codigo\": \"abc​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/aeropuerto",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aeropuerto"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120003\",\n    \"nombre\": \"Aeropuerto la NUbia\",\n    \"codigo\": \"abc​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}"
+								}
+							]
+						},
+						{
+							"name": "AddAeropuertoFailed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"   pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Get expected error message\", function () {",
+											"   var data = pm.response.json();",
+											"   pm.expect(data.message).to.eql('The aeropuerto can not be created. the Codigo is too long');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Aeropuerto la NUbia\",\n    \"codigo\": \"abc4​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "AddAeropuertoFailed",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nombre\": \"Aeropuerto la NUbia\",\n    \"codigo\": \"abc4​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/aeropuerto",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aeropuerto"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The aeropuerto can not be created. the Codigo is too long\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetAllAeropuertos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"pm.test('Number of Aeropuertos > ' + 0, function () {",
+											"   var data = pm.response.json()",
+											"   pm.expect(data.length).to.greaterThan(0)",
+											"});",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"   pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetAllAeropuertos",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aeropuerto",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aeropuerto"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "[\n   {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120003\",\n        \"nombre\": \"Aeropuerto la NUbia\",\n        \"codigo\": \"abc​\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Manizales\",\n        \"aerolineas\": []\n    },\n    {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120013\",\n        \"nombre\": \"Dorado\",\n        \"codigo\": \"cba​\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Bogota\",\n        \"aerolineas\": []\n    },\n    {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120015\",\n        \"nombre\": \"Matecaña\",\n        \"codigo\": \"cba​\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"pereira\",\n        \"aerolineas\": []\n\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "GetOneAeropuerto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"   pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto/{{aeropuerto_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto",
+										"{{aeropuerto_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetOneAeropuerto",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aeropuerto/{{aeropuerto_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aeropuerto",
+												"{{aeropuerto_id}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120013\",\n        \"nombre\": \"Dorado\",\n        \"codigo\": \"cba​\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Bogota\",\n        \"aerolineas\": []\n    }"
+								}
+							]
+						},
+						{
+							"name": "GetOneAeropuertoFailed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"   pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Get expected error message\", function () {",
+											"   var data = pm.response.json();",
+											"   pm.expect(data.message).to.eql(\"The aeropuerto with the given id was not found\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetOneAeropuertoFailed",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aeropuerto/00000000-0000-0000-0000-000000000000",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aeropuerto",
+												"00000000-0000-0000-0000-000000000000"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The aeropuerto with the given id was not found\"\n}"
+								}
+							]
+						},
+						{
+							"name": "UpdateAeropuerto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"   pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"nombre\": \"Aeropuerto internacional la Nubia\",\n        \"codigo\": \"123​\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Manizales\",\n        \"aerolineas\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto/{{aeropuerto_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto",
+										"{{aeropuerto_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "UpdateAeropuerto",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n   \"nombre\": \"Aeropuerto internacional la Nubia\",\n    \"codigo\": \"123​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/ingredient/{{ingredient_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"ingredient",
+												"{{ingredient_id}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120003\",\n        \"nombre\": \"Aeropuerto internacional la Nubia\",\n        \"codigo\": \"123​\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Manizales\",\n        \"aerolineas\": []\n}"
+								}
+							]
+						},
+						{
+							"name": "UpdateAeropiertoFailed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"   pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Get expected error message\", function () {",
+											"   var data = pm.response.json();",
+											"   pm.expect(data.message).to.eql(\"The aeropuerto with the given id was not found\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"nombre\": \"Aeropuerto internacional la Nubia\",\n    \"codigo\": \"123​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "UpdateAeropiertoFailed",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n   \"nombre\": \"Aeropuerto internacional la Nubia\",\n    \"codigo\": \"123​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/aeropuerto/00000000-0000-0000-0000-000000000000",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aeropuerto",
+												"00000000-0000-0000-0000-000000000000"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The aeropuerto with the given id was not found\"\n}"
+								}
+							]
+						},
+						{
+							"name": "DeleteAeropuerto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function () {",
+											"   pm.response.to.have.status(204);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto/{{aeropuerto_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto",
+										"{{aeropuerto_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DeleteAeropuerto",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aeropuerto/{{aeropuerto_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aeropuerto",
+												"{{aeropuerto_id}}"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "DeleteAeropuertoFailed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"   pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Get expected error message\", function () {",
+											"   var data = pm.response.json();",
+											"   pm.expect(data.message).to.eql(\"The aeropuerto with the given id was not found\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DeleteAeropuertoFailed",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aeropuerto/00000000-0000-0000-0000-000000000000",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aeropuerto",
+												"00000000-0000-0000-0000-000000000000"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The aeropuerto with the given id was not found\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Aerolinea",
+					"item": [
+						{
+							"name": "AddAerolinea",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = pm.response.json()",
+											"pm.globals.set(\"aeropuertoId\", data.id);",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"   pm.response.to.have.status(201);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Copa\",\n    \"descripcion\": \"Aerolinea de panam,a\",\n    \"fechaFundacion\": \"21/07/1944\",\n    \"fechaCreacion\": \"18/11/2023\",\n    \"urlPaginaWeb\": \"https://www.google.com/\",\n    \"aeropuertos\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aerolinea",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "AddAerolinea",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nombre\": \"Copa\",\n    \"descripcion\": \"Aerolinea de panam,a\",\n    \"fechaFundacion\": \"21/07/1944\",\n    \"fechaCreacion\": \"18/11/2023\",\n    \"urlPaginaWeb\": \"https://www.google.com/\",\n    \"aeropuertos\": []\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/aerolinea",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120003\",\n    \"nombre\": \"Copa\",\n    \"descripcion\": \"Aerolinea de panam,a\",\n    \"fechaFundacion\": \"21/07/1944\",\n    \"fechaCreacion\": \"18/11/2023\",\n    \"urlPaginaWeb\": \"https://www.google.com/\",\n    \"aeropuertos\": []\n\n}"
+								}
+							]
+						},
+						{
+							"name": "AddAerolineaFailed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"   pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Get expected error message\", function () {",
+											"   var data = pm.response.json();",
+											"   pm.expect(data.message).to.eql('The aerolinea can not be created. the fechafundacion must be older');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Aeropuerto la NUbia\",\n    \"codigo\": \"abc4​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aerolinea",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "AddAerolineaFailed",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nombre\": \"Copa\",\n    \"descripcion\": \"Aerolinea de panam,a\",\n    \"fechaFundacion\": \"18/11/2023\" ,\n    \"fechaCreacion\":  \"21/07/1944\",\n    \"urlPaginaWeb\": \"https://www.google.com/\",\n    \"aeropuertos\": []\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/aerolinea",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The aerolinea can not be created. the fechafundacion must be older\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetAllAerolineas",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"pm.test('Number of Aeropuertos > ' + 0, function () {",
+											"   var data = pm.response.json()",
+											"   pm.expect(data.length).to.greaterThan(0)",
+											"});",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"   pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetAllAerolineas",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aerolinea",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "[\n   {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120003\",\n        \"nombre\": \"Copa\",\n        \"descripcion\": \"Aerolinea de panam,a\",\n        \"fechaFundacion\": \"21/07/1945\",\n        \"fechaCreacion\": \"18/11/2023\",\n        \"urlPaginaWeb\": \"https://www.google.com/\",\n        \"aeropuertos\": []\n    },\n    {\n       \"id\": \"48a9ab90-1276-11ed-861d-0242ac120015\",\n        \"nombre\": \"avianca\",\n        \"descripcion\": \"Aerolinea de Colombia\",\n        \"fechaFundacion\": \"21/07/1985\",\n        \"fechaCreacion\": \"18/11/2023\",\n        \"urlPaginaWeb\": \"https://www.google.com/\",\n        \"aeropuertos\": []\n\n    },\n    {\n       \"id\": \"48a9ab90-1276-11ed-861d-0242ac120025\",\n        \"nombre\": \"American\",\n        \"descripcion\": \"Aerolinea de USA\",\n        \"fechaFundacion\": \"21/07/1932\",\n        \"fechaCreacion\": \"18/11/2023\",\n        \"urlPaginaWeb\": \"https://www.google.com/\",\n        \"aeropuertos\": []\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "GetOneAerolinea",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"   pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aerolinea/{{aerolinea_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea",
+										"{{aerolinea_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetOneAerolinea",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aerolinea/{{aerolinea_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea",
+												"{{aerolinea_id}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n        \"nombre\": \"avianca\",\n        \"descripcion\": \"Aerolinea de Colombia\",\n        \"fechaFundacion\": \"21/07/1985\",\n        \"fechaCreacion\": \"18/11/2023\",\n        \"urlPaginaWeb\": \"https://www.google.com/\",\n        \"aeropuertos\": []\n    }"
+								}
+							]
+						},
+						{
+							"name": "GetOneAerolineaFailed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"   pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Get expected error message\", function () {",
+											"   var data = pm.response.json();",
+											"   pm.expect(data.message).to.eql(\"The aerolinea with the given id was not found\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aerolinea/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetOneAerolineaFailed",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aerolinea/00000000-0000-0000-0000-000000000000",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea",
+												"00000000-0000-0000-0000-000000000000"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The aerolinea with the given id was not found\"\n}"
+								}
+							]
+						},
+						{
+							"name": "UpdateAerolinea",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"   pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Copa\",\n    \"descripcion\": \"Aerolinea de panam,a\",\n    \"fechaFundacion\": \"21/07/1955\",\n    \"fechaCreacion\": \"18/11/2023\",\n    \"urlPaginaWeb\": \"https://www.google.com/\",\n    \"aeropuertos\": []\n}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aerolinea/{{aerolinea_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea",
+										"{{aerolinea_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "UpdateAerolinea",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n   \"nombre\": \"Copa\",\n    \"descripcion\": \"Aerolinea de panam,a\",\n    \"fechaFundacion\": \"21/07/1955\",\n    \"fechaCreacion\": \"18/11/2023\",\n    \"urlPaginaWeb\": \"https://www.google.com/\",\n    \"aeropuertos\": []\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/aerolinea/{{aerolinea_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea",
+												"{{aerolinea_id}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"nombre\": \"Copa\",\n    \"descripcion\": \"Aerolinea de panam,a\",\n    \"fechaFundacion\": \"21/07/1955\",\n    \"fechaCreacion\": \"18/11/2023\",\n    \"urlPaginaWeb\": \"https://www.google.com/\",\n    \"aeropuertos\": []\n}\n}"
+								}
+							]
+						},
+						{
+							"name": "UpdateAerolineaFailed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"   pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Get expected error message\", function () {",
+											"   var data = pm.response.json();",
+											"   pm.expect(data.message).to.eql(\"The aerolinea can not be Updated. the fechafundacion must be older\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n       \"nombre\": \"Copa\",\n        \"descripcion\": \"Aerolinea de panam,a\",\n        \"fechaFundacion\": \"18/11/2023\",\n        \"fechaCreacion\":  \"21/07/1944\",\n        \"urlPaginaWeb\": \"https://www.google.com/\",\n        \"aeropuertos\": []\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/aerolinea/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aerolinea",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "UpdateAerolineaFailed",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n   \"nombre\": \"Aeropuerto internacional la Nubia\",\n    \"codigo\": \"123​\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Manizales\",\n    \"aerolineas\": []\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/aerolinea/00000000-0000-0000-0000-000000000000",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea",
+												"00000000-0000-0000-0000-000000000000"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 404,\n    \"message\": \"'The aerolinea can not be Updated. the fechafundacion must be older'\"\n}"
+								}
+							]
+						},
+						{
+							"name": "DeleteAerolinea",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function () {",
+											"   pm.response.to.have.status(204);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto/{{aeropuerto_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto",
+										"{{aeropuerto_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DeleteAerolinea",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aerolinea/{{aerolinea_id}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea",
+												"{{aerolinea_id}}"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "DeleteAerolineaFailed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"   pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Get expected error message\", function () {",
+											"   var data = pm.response.json();",
+											"   pm.expect(data.message).to.eql(\"The aeropuerto with the given id was not found\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/aeropuerto/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"aeropuerto",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DeleteAerolineaFailed",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/aerolinea/00000000-0000-0000-0000-000000000000",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"aerolinea",
+												"00000000-0000-0000-0000-000000000000"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The aerolinea with the given id was not found\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Seguridad",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = pm.response.json()",
+											"pm.globals.set(\"token\", data.token);",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"   pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"username\": \"admin\",\n   \"password\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "token"
+		}
+	]
+}

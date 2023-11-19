@@ -12,7 +12,7 @@ export class AerolineaAeropuertoController {
     constructor(private readonly aeropuertoAerolineaService: AerolineaAeropuertoService) { }
 
     @UseGuards(JwtAuthGuard)
-    @Post('associate/aerolinea/:aerolineaId/aeropuerto/:aeropuertoAssociateId')
+    @Post('aerolinea/:aerolineaId/aeropuerto/:aeropuertoAssociateId')
     async associateAeropuertoToAerolinea(
         @Param('aerolineaId') aerolineaId: string, 
         @Param('aeropuertoAssociateId') aeropuertoAssociateId: string) {
@@ -32,7 +32,7 @@ export class AerolineaAeropuertoController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get('find/aerolinea/:aerolineaId/aeropuerto/:aeropuertoId')
+    @Get('aerolinea/:aerolineaId/aeropuerto/:aeropuertoId')
     async findAeropuertoFromAerolinea(
         @Param('aerolineaId') aerolineaId: string,
         @Param('aeropuertoId') aeropuertoId: string) {
@@ -43,7 +43,7 @@ export class AerolineaAeropuertoController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Put('update/aerolinea/:aerolineaId/aeropuertos/:aeropuertoId')
+    @Put('aerolinea/:aerolineaId/aeropuertos/:aeropuertoId')
     async updateAeropuertosFromAerolinea( 
         @Param('aerolineaId') aerolineaId: string,
         @Param('aeropuertoId') aeropuertoId: string) {
@@ -54,7 +54,7 @@ export class AerolineaAeropuertoController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Delete('delete/aerolinea/:aerolineaId/aeropuerto')
+    @Delete('aerolinea/:aerolineaId')
     @HttpCode(204)
     async deleteAeropuertosFromAerolinea(@Param('aerolineaId') aerolineaId: string) {
         this.logger.debug('deleteAeropuertosFromAerolinea');
