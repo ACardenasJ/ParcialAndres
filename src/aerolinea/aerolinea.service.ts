@@ -33,22 +33,36 @@ export class AerolineaService {
   }
 
   async create(aerolinea: AerolineaEntity): Promise<AerolineaEntity> {
-    return await this.aerolineaRepository.save(aerolinea);
+    if (new Date(aerolinea.fechaCreacion) > new Date(aerolinea.fechaFundacion)){
+      return await this.aerolineaRepository.save(aerolinea)
+    }
+    else
+      throw new BusinessLogicException(
+        'The aerolinea can not be created. the fechafundacion must be older',
+        BusinessError.PRECONDITION_FAILED,
+      );
   }
 
-  async update(id: string, aerolineaRepository: AerolineaEntity): Promise<AerolineaEntity> {
+  async update(id: string, aerolineaToUpdate: AerolineaEntity): Promise<AerolineaEntity> {
     const persistedAerolinea: AerolineaEntity =
       await this.aerolineaRepository.findOne({ where: { id } });
-    if (!persistedAerolinea) {
+    if (!persistedAerolinea){
       throw new BusinessLogicException(
         'The aerolinea with the given id was not found',
         BusinessError.NOT_FOUND,
       );
     }
-    return await this.aerolineaRepository.save({
-      ...persistedAerolinea,
-      ...aerolineaRepository,
-    });
+   if (!aerolineaToUpdate.fechaCreacion || ! aerolineaToUpdate.fechaCreacion || new Date(aerolineaToUpdate.fechaCreacion) > new Date(aerolineaToUpdate.fechaFundacion)){
+      return await this.aerolineaRepository.save({
+        ...persistedAerolinea,
+        ...aerolineaToUpdate,
+      });
+    } 
+   else
+    throw new BusinessLogicException(
+      'The aerolinea can not be Updated. the fechafundacion must be older',
+      BusinessError.PRECONDITION_FAILED,
+    ); 
   }
 
   async delete(id: string) {
@@ -61,7 +75,6 @@ export class AerolineaService {
         BusinessError.NOT_FOUND,
       );
     }
-
     await this.aerolineaRepository.remove(aerolinea);
   }
 }

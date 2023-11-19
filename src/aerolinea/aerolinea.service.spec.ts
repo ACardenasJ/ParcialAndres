@@ -19,6 +19,7 @@ describe('Aerolinearvice', () => {
         nombre: faker.company.name(),
         descripcion: faker.lorem.sentence(),
         fechaFundacion: new Date(faker.date.past()),
+        fechaCreacion: new Date(faker.date.future()),
         urlPaginaWeb: faker.address.country(),
       });
       aerolineaList.push(aerolineaEntity);
@@ -68,7 +69,8 @@ describe('Aerolinearvice', () => {
       id: '48a9ab90-1276-11ed-861d-0242ac120003',
       nombre: faker.company.name(),
       descripcion: faker.lorem.sentence(),
-      fechaFundacion: new Date(faker.date.past()) ,
+      fechaFundacion: new Date(faker.date.past()),
+      fechaCreacion: new Date(faker.date.future()),
       urlPaginaWeb: faker.address.cardinalDirection(),
       aeropuertos: [],
     };
@@ -82,10 +84,29 @@ describe('Aerolinearvice', () => {
     expect(storedaerolinea.descripcion).toEqual(newaerolinea.descripcion);
   });
 
+  it('create should failed condition problem', async () => {
+    const aerolinea: AerolineaEntity = {
+      id: '48a9ab90-1276-11ed-861d-0242ac120003',
+      nombre: faker.company.name(),
+      descripcion: faker.lorem.sentence(),
+      fechaFundacion: new Date(faker.date.future()),
+      fechaCreacion: new Date(faker.date.past()),
+      urlPaginaWeb: faker.address.cardinalDirection(),
+      aeropuertos: [],
+    };
+    await expect(() => service.create(aerolinea)).rejects.toHaveProperty(
+      'message',
+      'The aerolinea can not be created. the fechafundacion must be older',
+    );
+ 
+  });
+
   it('update should modify a Aerolineas', async () => {
     const aerolinea: AerolineaEntity = aerolineaList[0];
     aerolinea.nombre = 'Colombia';
     aerolinea.descripcion = 'tercer mas hermosos del mundo';
+    aerolinea.fechaFundacion = new Date(faker.date.past());
+    aerolinea.fechaCreacion = new Date(faker.date.future());
     const updateaerolinea: AerolineaEntity = await service.update(aerolinea.id, aerolinea);
     expect(updateaerolinea).not.toBeNull();
     const storedaerolinea: AerolineaEntity = await repository.findOne({
@@ -94,6 +115,18 @@ describe('Aerolinearvice', () => {
     expect(storedaerolinea).not.toBeNull();
     expect(storedaerolinea.nombre).toEqual(aerolinea.nombre);
     expect(storedaerolinea.descripcion).toEqual(aerolinea.descripcion);
+  });
+
+  it('update should failed condition problem', async () => {
+    const aerolinea: AerolineaEntity = aerolineaList[0];
+    aerolinea.nombre = 'Colombia';
+    aerolinea.descripcion = 'tercer mas hermosos del mundo';
+    aerolinea.fechaFundacion = new Date(faker.date.future());
+    aerolinea.fechaCreacion = new Date(faker.date.past());
+    await expect(() => service.update(aerolinea.id, aerolinea)).rejects.toHaveProperty(
+      'message',
+      'The aerolinea can not be Updated. the fechafundacion must be older',
+    );
   });
 
   it('update should throw an exception for an invalid Aerolineas', async () => {

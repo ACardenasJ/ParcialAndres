@@ -3,6 +3,7 @@ import {  Column,
     Entity,
     JoinTable,
     ManyToMany,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -23,10 +24,7 @@ export class AeropuertoEntity {
     @Column()
     ciudad: string;
     
-    @ManyToMany(
-        () => AerolineaEntity, (aerolinea) => aerolinea.aeropuertos,
-      )
-      @JoinTable()
-      aerolineas: AerolineaEntity[];
+    @OneToMany(() => AerolineaEntity, (aerolinea) => aerolinea.aeropuertos)
+    aerolineas: AerolineaEntity[];
   
 }

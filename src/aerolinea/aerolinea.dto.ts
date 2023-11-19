@@ -16,5 +16,9 @@ export class AerolineaDTO {
 
   @IsString()
   @IsNotEmpty()
+  readonly fechaCreacion: Date;
+
+  @IsString()
+  @IsNotEmpty()
   readonly urlPaginaWeb: string;
 }

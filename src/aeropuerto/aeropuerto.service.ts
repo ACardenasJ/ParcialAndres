@@ -35,22 +35,34 @@ export class AeropuertoService {
       }
     
       async create(aeropuerto: AeropuertoEntity): Promise<AeropuertoEntity> {
-        return await this.aeropuertoRepository.save(aeropuerto);
+        if (aeropuerto.codigo.length <= 3)
+          return await this.aeropuertoRepository.save(aeropuerto);
+        else
+        throw new BusinessLogicException(
+          'The aeropuerto can not be created. the Codigo is too long',
+          BusinessError.PRECONDITION_FAILED,
+        ); 
       }
     
-      async update(id: string, aeropuertoRepository: AeropuertoEntity): Promise<AeropuertoEntity> {
-        const persistedaeropuerto: AeropuertoEntity =
+      async update(id: string, aeropuertoUpdate: AeropuertoEntity): Promise<AeropuertoEntity> {
+        const persistedAeropuerto: AeropuertoEntity =
           await this.aeropuertoRepository.findOne({ where: { id } });
-        if (!persistedaeropuerto) {
+        if (!persistedAeropuerto) {
           throw new BusinessLogicException(
             'The aeropuerto with the given id was not found',
             BusinessError.NOT_FOUND,
           );
         }
+        if (aeropuertoUpdate.codigo.length <= 3 || !aeropuertoUpdate.codigo)
         return await this.aeropuertoRepository.save({
-          ...persistedaeropuerto,
-          ...aeropuertoRepository,
+          ...persistedAeropuerto,
+          ...aeropuertoUpdate,
         });
+        else
+        throw new BusinessLogicException(
+          'The aeropuerto can not be Updated. the Codigo is too long',
+          BusinessError.PRECONDITION_FAILED,
+        ); 
       }
     
       async delete(id: string) {
@@ -63,7 +75,6 @@ export class AeropuertoService {
             BusinessError.NOT_FOUND,
           );
         }
-    
         await this.aeropuertoRepository.remove(aeropuerto);
       }
 }
