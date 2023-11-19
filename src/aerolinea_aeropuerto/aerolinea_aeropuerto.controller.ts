@@ -43,14 +43,14 @@ export class AerolineaAeropuertoController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Put('update/aerolinea/:aerolineaId/aeropuertos/:pais')
+    @Put('update/aerolinea/:aerolineaId/aeropuertos/:aeropuertoId')
     async updateAeropuertosFromAerolinea( 
         @Param('aerolineaId') aerolineaId: string,
-        @Param('pais') paisUpdate: string) {
+        @Param('aeropuertoId') aeropuertoId: string) {
         this.logger.debug('updateAeropuertosFromAerolinea');
         return await this.aeropuertoAerolineaService.updateAeropuertosFromAerolinea(
             aerolineaId, 
-            paisUpdate);
+            aeropuertoId);
     }
 
     @UseGuards(JwtAuthGuard)

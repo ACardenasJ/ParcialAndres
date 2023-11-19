@@ -24,7 +24,7 @@ export class AerolineaAeropuertoService {
     const aerolineaToAssociate: AerolineaEntity =
       await this.aerolineaRepository.findOne({
         where: { id: aerolineaId },
-        //relations: ['aeropuertos'],
+        relations: ['aeropuertos'],
       });
 
     if (!aerolineaToAssociate) {
@@ -42,7 +42,7 @@ export class AerolineaAeropuertoService {
         BusinessError.NOT_FOUND,
       );
     }
-    aerolineaToAssociate.aeropuertos.push(aeropuerto);
+    aerolineaToAssociate.aeropuertos = [aeropuerto];
     return await this.aerolineaRepository.save(aerolineaToAssociate);
   }
 
@@ -92,43 +92,71 @@ export class AerolineaAeropuertoService {
 
   async updateAeropuertosFromAerolinea(
     aerolineaId: string, 
-    pais: string
+    aeropuertoid: string
     ): Promise<AeropuertoEntity[]> {
-    const aerolineaToAnalize: AerolineaEntity =
-      await this.aerolineaRepository.findOne({
-        where: { id: aerolineaId },
-       // relations: ['aeropuertos'],
-      });
+      const aerolineaToAnalize: AerolineaEntity =
+        await this.aerolineaRepository.findOne({
+          where: { id: aerolineaId },
+          relations: ['aeropuertos'],
+        });
     if (!aerolineaToAnalize) {
       throw new BusinessLogicException(
         'The Aerolinea with the given id was not found',
         BusinessError.NOT_FOUND,
       );
     }
-    aerolineaToAnalize.aeropuertos.forEach((aeropuerto)=> {
-      aeropuerto.pais = pais;
-      this.aeropuertoRepository.save(aeropuerto);
-    });
+    const aeropuertoToAnalize: AeropuertoEntity =
+      await this.aeropuertoRepository.findOne({
+        where: { id: aeropuertoid },
+      });
+    if (!aeropuertoToAnalize) {
+      throw new BusinessLogicException(
+        'The Aeropuerto with the given id was not found',
+        BusinessError.NOT_FOUND,
+      );
+    }
+    if(aerolineaToAnalize.aeropuertos)
+      aerolineaToAnalize.aeropuertos.forEach((aeropuerto)=> {
+        if(aeropuerto.id === aeropuertoToAnalize.id){
+          aeropuerto.nombre = aeropuertoToAnalize.nombre;
+          aeropuerto.codigo = aeropuertoToAnalize.codigo;
+          aeropuerto.ciudad = aeropuertoToAnalize.ciudad;
+          aeropuerto.pais = aeropuertoToAnalize.pais;
+          this.aeropuertoRepository.save(aeropuerto);
+        } 
+      });
+    else{
+      aerolineaToAnalize.aeropuertos = []
+      aerolineaToAnalize.aeropuertos.push(aeropuertoToAnalize)
+      this.aerolineaRepository.save(aerolineaToAnalize);
+    } 
     return aerolineaToAnalize.aeropuertos;
   }
 
   async deleteAeropuertosFromAerolinea(
     aerolineaId: string
     ): Promise<AeropuertoEntity[]> {
-    const aerolineaToAnalize: AerolineaEntity =
-      await this.aerolineaRepository.findOne({
-        where: { id: aerolineaId },
-       // relations: ['aeropuertos'],
-      });
+      const aerolineaToAnalize: AerolineaEntity =
+        await this.aerolineaRepository.findOne({
+          where: { id: aerolineaId },
+          relations: ['aeropuertos'],
+        });
     if (!aerolineaToAnalize) {
       throw new BusinessLogicException(
         'The Aerolinea with the given id was not found',
         BusinessError.NOT_FOUND,
       );
     }
-    aerolineaToAnalize.aeropuertos.forEach((aeropuerto)=> {
-      this.aeropuertoRepository.remove(aeropuerto);
-    });
+    console.log(aerolineaToAnalize);
+    if(aerolineaToAnalize.aeropuertos)
+        aerolineaToAnalize.aeropuertos.forEach((aeropuerto)=> {
+          this.aeropuertoRepository.remove(aeropuerto);
+        });
+    else
+    throw new BusinessLogicException(
+      'The Aerolinea with the given id does not get a Aeropuerto to delete',
+      BusinessError.FAILED_DELETE,
+    );
     return aerolineaToAnalize.aeropuertos;
   }
 

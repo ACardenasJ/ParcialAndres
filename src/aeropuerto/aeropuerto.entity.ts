@@ -24,7 +24,9 @@ export class AeropuertoEntity {
     @Column()
     ciudad: string;
     
-    @OneToMany(() => AerolineaEntity, (aerolinea) => aerolinea.aeropuertos)
+    @OneToMany(() => AerolineaEntity, (aerolinea) => aerolinea.aeropuertos, {
+        cascade: true,
+      })
     aerolineas: AerolineaEntity[];
   
 }
