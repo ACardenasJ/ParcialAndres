@@ -1,7 +1,7 @@
 
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class AeropuertoaDTO {
+export class AeropuertoDTO {
   @IsString()
   @IsNotEmpty()
   readonly nombre: string;

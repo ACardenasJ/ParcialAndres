@@ -7,7 +7,7 @@ import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-erro
 import { AeropuertoService } from './aeropuerto.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
 import { AeropuertoEntity } from './aeropuerto.entity';
-import { AeropuertoaDTO } from './aeropuerto.dto';
+import { AeropuertoDTO } from './aeropuerto.dto';
 import { plainToInstance } from 'class-transformer';
 
 @Controller('aeropuerto')
@@ -32,7 +32,7 @@ export class AeropuertoController {
   
     @Post()
     @UseGuards(JwtAuthGuard)
-    async create(@Body() aeropuertoDto: AeropuertoaDTO) {
+    async create(@Body() aeropuertoDto: AeropuertoDTO) {
       this.logger.debug('create');
       const aeropuerto: AeropuertoEntity = plainToInstance(
         AeropuertoEntity,
@@ -43,7 +43,7 @@ export class AeropuertoController {
   
     @Put(':aeropuertoId')
     @UseGuards(JwtAuthGuard)
-    async update(@Param('aeropuertoId') aeropuertoId: string, @Body() aeropuertoDto: aeropuertoDTO,
+    async update(@Param('aeropuertoId') aeropuertoId: string, @Body() aeropuertoDto: AeropuertoDTO,
     ) {
       this.logger.debug('update');
       const aeropuerto: AeropuertoEntity = plainToInstance(
